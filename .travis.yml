@@ -9,3 +9,6 @@ sudo: required
 before_install:
 - echo "deb http://us.archive.ubuntu.com/ubuntu trusty main universe" | sudo tee -a /etc/apt/sources.list
 - sudo apt-get update
+install:
+- sudo apt-get install yum yum-utils mock pigz python-rpm python-openssl python-urlgrabber python-decoratortools python-lzma python-setuptools python-krbv
+script: travis/build
