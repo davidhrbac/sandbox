@@ -1,0 +1,11 @@
+git:
+  depth: 1000
+branches:
+  only:
+  - master
+notifications:
+  email: false
+sudo: required
+before_install:
+- echo "deb http://us.archive.ubuntu.com/ubuntu trusty main universe" | sudo tee -a /etc/apt/sources.list
+- sudo apt-get update
