@@ -28,6 +28,7 @@ git tag
 tito init
 tito tag --keep-version --no-auto-changelog
 git tag
+git describe --match=tmux-1.8-2 ed39d8572bc18d13c39b128db4703597e3548dfb
 ls -al
 tito build --test --srpm
 echo -en "travis_fold:start:$SPEC_FILE-build\\r"
