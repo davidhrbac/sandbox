@@ -28,7 +28,7 @@ cd specs/tmux
 #rpmbuild -bs tmux.spec --nodeps
 tito tag --keep-version --no-auto-changelog
 ls -al
-tito build --test --srpm
+tito build --test --srpm --always
 echo -en "travis_fold:start:$SPEC_FILE-build\\r"
 sudo mock init -r centos-6-x86_64 --resultdir=~/mock/
 echo -en "travis_fold:end:$SPEC_FILE-build\\r"
