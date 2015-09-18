@@ -22,3 +22,4 @@ CHANGED_FILES=$(git diff --name-only $COMMIT_RANGE | egrep "\.spec$")
 
 for SPEC_FILE in $CHANGED_FILES ; do
   echo SPEC_FILE
+done
