@@ -18,5 +18,5 @@ install:
 before_script:
 - sudo pwd
 - sudo cp travis/mock/centos-6-x86_64.cfg /etc/mock/
-- mkdir .tito/custom
+- mkdir -p .tito/custom
 script: travis/build
