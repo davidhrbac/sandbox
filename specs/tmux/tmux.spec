@@ -8,7 +8,7 @@
 Summary: Terminal multiplexer program
 Name: tmux
 Version: 1.8
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/System
 URL: http://tmux.sourceforge.net/

@@ -18,6 +18,7 @@ fi
 
 echo "Commit range: $COMMIT_RANGE"
 
-CHANGED_FILES=$(git diff --name-only $COMMIT_RANGE)
+CHANGED_FILES=$(git diff --name-only $COMMIT_RANGE | egrep "\.spec$")
 
-echo $CHANGED_FILES
+for SPEC_FILE in $CHANGED_FILES ; do
+  echo SPEC_FILE
