@@ -16,7 +16,7 @@ install:
 - sudo groupadd mock
 - sudo usermod -a -G mock travis
 before_script:
-- sudo pwd
 - sudo cp travis/mock/centos-6-x86_64.cfg /etc/mock/
+- git config user.email "travis@localhost" && git config user.name "Travis"
 - mkdir -p .tito/custom
 script: travis/build
