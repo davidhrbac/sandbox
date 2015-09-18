@@ -24,4 +24,4 @@ for SPEC_FILE in $CHANGED_FILES ; do
   echo $SPEC_FILE
 done
 
-mock init -r centos-6-x86_64
+sudo mock init -r centos-6-x86_64
