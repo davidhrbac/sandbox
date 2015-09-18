@@ -24,6 +24,7 @@ for SPEC_FILE in $CHANGED_FILES ; do
   echo $SPEC_FILE
 done
 cd specs/tmux
+git tag
 tito init
 tito tag --keep-version --no-auto-changelog
 ls -al
