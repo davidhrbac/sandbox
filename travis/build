@@ -28,6 +28,7 @@ cd specs/tmux
 #rpmbuild -bs tmux.spec --nodeps
 tito tag --keep-version --no-auto-changelog
 cd -
+cd .tito
 ls -al
 tito build --test --srpm
 echo -en "travis_fold:start:$SPEC_FILE-build\\r"
