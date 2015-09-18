@@ -1,10 +1,10 @@
 [globalconfig]
-default_builder = tito.builder.Builder
+default_builder = tito.builder.NoTgzBuilder
 default_tagger = tito.tagger.VersionTagger
 #lib_dir = .tito/custom/
 
 [buildconfig]
-builder = tito.builder.Builder
+builder = tito.builder.NoTgzBuilder
 tagger = tito.tagger.VersionTagger
 #lib_dir = .tito/custom/
 
