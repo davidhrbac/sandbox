@@ -24,6 +24,7 @@ for SPEC_FILE in $CHANGED_FILES ; do
   echo $SPEC_FILE
 done
 cd specs/tmux
+spectool -g -R tmux.spec
 rpmbuild -bs tmux.spec --nodeps
 #tito build --test --srpm
 echo -en "travis_fold:start:$SPEC_FILE-build\\r"
