@@ -28,8 +28,9 @@ cd specs/tmux
 #rpmbuild -bs tmux.spec --nodeps
 tito tag --keep-version --no-auto-changelog
 cd -
-cd .tito
+cd .tito/custom
 ls -al
+ls -al /tmp/tito
 tito build --test --srpm
 echo -en "travis_fold:start:$SPEC_FILE-build\\r"
 sudo mock init -r centos-6-x86_64 --resultdir=~/mock/
