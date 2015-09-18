@@ -24,7 +24,8 @@ for SPEC_FILE in $CHANGED_FILES ; do
   echo $SPEC_FILE
 done
 cd specs/tmux
-tito build --test --srpm
+rpmbuild -bs tmux.spec --nodeps
+#tito build --test --srpm
 echo -en "travis_fold:start:$SPEC_FILE-build\\r"
 sudo mock init -r centos-6-x86_64 --resultdir=~/mock/
 echo -en "travis_fold:end:$SPEC_FILE-build\\r"
