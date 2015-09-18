@@ -27,6 +27,7 @@ cd specs/tmux
 git tag
 tito init
 tito tag --keep-version --no-auto-changelog
+git tag
 ls -al
 tito build --test --srpm
 echo -en "travis_fold:start:$SPEC_FILE-build\\r"
