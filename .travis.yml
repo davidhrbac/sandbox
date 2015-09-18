@@ -16,5 +16,5 @@ install:
 - sudo groupadd mock
 - sudo usermod -a -G mock travis
 before_script:
-- sudo cp rel-eng/travis/mock/spacewalk.cfg /etc/mock/
+- sudo cp travis/mock/centos-6-x86_64.cfg /etc/mock/
 script: travis/build
