@@ -32,9 +32,13 @@ tito tag --keep-version --no-auto-changelog
 ls -al
 tito build --srpm --offline
 
+echo -en "travis_fold:start:$package_basename-build\\r"
+
 echo -en "travis_fold:start:$SPEC_FILE-build\\r"
 sudo mock -r centos-6-x86_64 --resultdir=/tmp/mock/$package_basename --rebuild /tmp/tito/amavisd-new-2.8.1-1.src.rpm
 echo -en "travis_fold:end:$SPEC_FILE-build\\r"
+
+ls -al /tmp/mock/$package_basename
 
 echo -en "travis_fold:start:$package_basename-build-log\\r"
 echo "# build.log"
