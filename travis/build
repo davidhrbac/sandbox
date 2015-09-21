@@ -24,16 +24,16 @@ for SPEC_FILE in $CHANGED_FILES ; do
   echo $SPEC_FILE
 done
 
-package_basename="tmux"
+package_basename="amavisd-new"
 
-cd specs/tmux
+cd specs/amavisd-new
 tito init
 tito tag --keep-version --no-auto-changelog
 ls -al
 tito build --srpm --offline
 
 echo -en "travis_fold:start:$SPEC_FILE-build\\r"
-sudo mock -r centos-6-x86_64 --resultdir=/tmp/mock/$package_basename --rebuild /tmp/tito/tmux-1.8-2.src.rpm
+sudo mock -r centos-6-x86_64 --resultdir=/tmp/mock/$package_basename --rebuild /tmp/tito/amavisd-new-2.8.1-1.src.rpm
 echo -en "travis_fold:end:$SPEC_FILE-build\\r"
 
 echo -en "travis_fold:start:$package_basename-build-log\\r"
