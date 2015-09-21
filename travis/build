@@ -23,11 +23,32 @@ CHANGED_FILES=$(git diff --name-only $COMMIT_RANGE | egrep "\.spec$")
 for SPEC_FILE in $CHANGED_FILES ; do
   echo $SPEC_FILE
 done
+
+package_basename="tmux"
+
 cd specs/tmux
 tito init
 tito tag --keep-version --no-auto-changelog
 ls -al
 tito build --srpm --offline
+
 echo -en "travis_fold:start:$SPEC_FILE-build\\r"
-sudo mock -r centos-6-x86_64 --resultdir=~/mock/ --rebuild /tmp/tito/tmux-1.8-2.src.rpm
+sudo mock -r centos-6-x86_64 --resultdir=/tmp/mock/$package_basename --rebuild /tmp/tito/tmux-1.8-2.src.rpm
 echo -en "travis_fold:end:$SPEC_FILE-build\\r"
+
+echo -en "travis_fold:start:$package_basename-build-log\\r"
+echo "# build.log"
+cat /tmp/mock/$package_basename/build.log
+echo -en "travis_fold:end:$package_basename-build-log\\r"
+
+echo -en "travis_fold:start:$package_basename-root-log\\r"
+echo "# root.log"
+cat /tmp/mock/$package_basename/root.log
+echo -en "travis_fold:end:$package_basename-root-log\\r"
+
+echo -en "travis_fold:start:$package_basename-state-log\\r"
+echo "# state.log"
+cat /tmp/mock/$package_basename/state.log
+echo -en "travis_fold:end:$package_basename-state-log\\r"
+
+echo -en "travis_fold:end:$package_basename-build\\r"
