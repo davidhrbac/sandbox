@@ -23,7 +23,7 @@ CHANGED_FILES=$(git diff --name-only $COMMIT_RANGE | egrep "\.spec$")
 for SPEC_FILE in $CHANGED_FILES ; do
   echo "Working with $SPEC_FILE"
 
-  package_basename=$(basename $SPEC_FILE)
+  package_basename=$(dirname $SPEC_FILE | xargs basename)
   
   cd specs/$package_basename
   tito init
