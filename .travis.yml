@@ -11,7 +11,7 @@ before_install:
 - sudo apt-get update
 - wget https://github.com/dgoodwin/tito/archive/tito-0.4.18-1.tar.gz -O /tmp/tito.tar.gz
 install:
-- sudo apt-get install yum yum-utils mock pigz python-rpm python-openssl python-urlgrabber python-decoratortools python-lzma python-setuptools python-krbv
+- sudo apt-get install yum yum-utils mock pigz python-rpm python-openssl python-urlgrabber python-decoratortools python-lzma python-setuptools python-krbv obs-build
 - sudo pip install /tmp/tito.tar.gz
 - sudo groupadd mock
 - sudo usermod -a -G mock travis
