@@ -54,8 +54,6 @@ for SPEC_FILE in $CHANGED_FILES ; do
   sudo mock -r centos-6-x86_64 --resultdir=/tmp/mock/$package_basename --rebuild $srpm
   echo -en "travis_fold:end:$SPEC_FILE-build\\r"
   
-  ls -al /tmp/mock/$package_basename
-  
   echo -en "travis_fold:start:$package_basename-build-log\\r"
   echo "# build.log"
   cat /tmp/mock/$package_basename/build.log
@@ -72,4 +70,6 @@ for SPEC_FILE in $CHANGED_FILES ; do
   echo -en "travis_fold:end:$package_basename-state-log\\r"
   
   echo -en "travis_fold:end:$package_basename-build\\r"
+
+  ls -al /tmp/mock/$package_basename
 done
