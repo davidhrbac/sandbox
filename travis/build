@@ -33,7 +33,12 @@ rpmspec -q --srpm --qf "%{source}\n" $package_basename.spec
 rpmspec -P $package_basename.spec | grep -Po '(?<=Source: ).+(?=)' | xargs wget 
 rpmspec -P $package_basename.spec | grep -Po '(?<=Source\d: ).+(?=)' | xargs wget
 
+git add .
+git commit -a -m "Source downloaded"
+
 tito tag --keep-version --no-auto-changelog
+
+git status
 ls -al
 tito build --srpm --offline
 
