@@ -25,6 +25,8 @@ for SPEC_FILE in $CHANGED_FILES ; do
 
   package_basename=$(dirname $SPEC_FILE | xargs basename)
   
+  echo -en "travis_fold:start:$package_basename-get-sources\\r"
+  
   cd specs/$package_basename
   tito init
   rpmspec -q --srpm --qf "%{version}\n" $package_basename.spec
@@ -43,6 +45,8 @@ for SPEC_FILE in $CHANGED_FILES ; do
   # create SRPM
   srpm=$(tito build --srpm --offline | tail -n1 | sed 's/^Wrote: //g')
   echo "SRPM created: $srpm"
+
+  echo -en "travis_fold:end:$package_basename-get-sources\\r"
 
   echo -en "travis_fold:start:$package_basename-build\\r"
   
