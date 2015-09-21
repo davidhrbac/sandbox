@@ -20,7 +20,7 @@ echo "Commit range: $COMMIT_RANGE"
 
 CHANGED_FILES=$(git diff --name-only $COMMIT_RANGE | egrep "\.spec$")
 
-[[ -z "CHANGED_FILES" ]] && { echo "Empty SPEC file set..." ; exit 1; }
+[[ -z "$CHANGED_FILES" ]] && { echo "Empty SPEC file set..." ; exit 1; }
 
 for SPEC_FILE in $CHANGED_FILES ; do
   echo "Working with $SPEC_FILE"
