@@ -29,8 +29,8 @@ package_basename="amavisd-new"
 cd specs/amavisd-new
 rpmspec -q --srpm --qf "%{version}\n" $package_basename.spec
 rpmspec -q --srpm --qf "%{source}\n" $package_basename.spec
-rpmspec -P $package_basename.spec | grep -Po '(?<=Source: ).+(?=)' 
-rpmspec -P $package_basename.spec | grep -Po '(?<=Source\d: ).+(?=)' 
+rpmspec -P $package_basename.spec | grep -Po '(?<=Source: ).+(?=)' | xargs wget 
+rpmspec -P $package_basename.spec | grep -Po '(?<=Source\d: ).+(?=)' | xargs wget
 
 tito init
 tito tag --keep-version --no-auto-changelog
