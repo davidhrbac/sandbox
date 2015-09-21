@@ -21,48 +21,51 @@ echo "Commit range: $COMMIT_RANGE"
 CHANGED_FILES=$(git diff --name-only $COMMIT_RANGE | egrep "\.spec$")
 
 for SPEC_FILE in $CHANGED_FILES ; do
-  echo $SPEC_FILE
+  echo "Working with $SPEC_FILE"
+
+  package_basename=$(basename $SPEC_FILE)
+  
+  cd specs/package_basename
+  tito init
+  rpmspec -q --srpm --qf "%{version}\n" $package_basename.spec
+  rpmspec -q --srpm --qf "%{source}\n" $package_basename.spec
+  rpmspec -P $package_basename.spec | grep -Po '(?<=Source: ).+(?=)' | xargs wget 
+  rpmspec -P $package_basename.spec | grep -Po '(?<=Source\d: ).+(?=)' | xargs wget
+  
+  git add .
+  git commit -a -m "Source downloaded"
+  
+  tito tag --keep-version --no-auto-changelog
+  
+  git status
+  ls -al
+  #tito build --srpm --offline
+  # create SRPM
+  srpm=$(tito build --srpm --offline | tail -n1 | sed 's/^Wrote: //g')
+  echo "SRPM created: $srpm"
+
+  echo -en "travis_fold:start:$package_basename-build\\r"
+  
+  echo -en "travis_fold:start:$SPEC_FILE-build\\r"
+  sudo mock -r centos-6-x86_64 --resultdir=/tmp/mock/$package_basename --rebuild $srpm
+  echo -en "travis_fold:end:$SPEC_FILE-build\\r"
+  
+  ls -al /tmp/mock/$package_basename
+  
+  echo -en "travis_fold:start:$package_basename-build-log\\r"
+  echo "# build.log"
+  cat /tmp/mock/$package_basename/build.log
+  echo -en "travis_fold:end:$package_basename-build-log\\r"
+  
+  echo -en "travis_fold:start:$package_basename-root-log\\r"
+  echo "# root.log"
+  cat /tmp/mock/$package_basename/root.log
+  echo -en "travis_fold:end:$package_basename-root-log\\r"
+  
+  echo -en "travis_fold:start:$package_basename-state-log\\r"
+  echo "# state.log"
+  cat /tmp/mock/$package_basename/state.log
+  echo -en "travis_fold:end:$package_basename-state-log\\r"
+  
+  echo -en "travis_fold:end:$package_basename-build\\r"
 done
-
-package_basename="amavisd-new"
-
-cd specs/amavisd-new
-tito init
-rpmspec -q --srpm --qf "%{version}\n" $package_basename.spec
-rpmspec -q --srpm --qf "%{source}\n" $package_basename.spec
-rpmspec -P $package_basename.spec | grep -Po '(?<=Source: ).+(?=)' | xargs wget 
-rpmspec -P $package_basename.spec | grep -Po '(?<=Source\d: ).+(?=)' | xargs wget
-
-git add .
-git commit -a -m "Source downloaded"
-
-tito tag --keep-version --no-auto-changelog
-
-git status
-ls -al
-tito build --srpm --offline
-
-echo -en "travis_fold:start:$package_basename-build\\r"
-
-echo -en "travis_fold:start:$SPEC_FILE-build\\r"
-sudo mock -r centos-6-x86_64 --resultdir=/tmp/mock/$package_basename --rebuild /tmp/tito/amavisd-new-2.8.1-1.src.rpm
-echo -en "travis_fold:end:$SPEC_FILE-build\\r"
-
-ls -al /tmp/mock/$package_basename
-
-echo -en "travis_fold:start:$package_basename-build-log\\r"
-echo "# build.log"
-cat /tmp/mock/$package_basename/build.log
-echo -en "travis_fold:end:$package_basename-build-log\\r"
-
-echo -en "travis_fold:start:$package_basename-root-log\\r"
-echo "# root.log"
-cat /tmp/mock/$package_basename/root.log
-echo -en "travis_fold:end:$package_basename-root-log\\r"
-
-echo -en "travis_fold:start:$package_basename-state-log\\r"
-echo "# state.log"
-cat /tmp/mock/$package_basename/state.log
-echo -en "travis_fold:end:$package_basename-state-log\\r"
-
-echo -en "travis_fold:end:$package_basename-build\\r"
