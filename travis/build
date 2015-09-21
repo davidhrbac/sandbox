@@ -25,7 +25,7 @@ for SPEC_FILE in $CHANGED_FILES ; do
 
   package_basename=$(basename $SPEC_FILE)
   
-  cd specs/package_basename
+  cd specs/$package_basename
   tito init
   rpmspec -q --srpm --qf "%{version}\n" $package_basename.spec
   rpmspec -q --srpm --qf "%{source}\n" $package_basename.spec

@@ -5,7 +5,7 @@
 Summary: Extract, test and view RAR archives
 Name: unrar
 Version: 5.0.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: Freeware
 Group: Applications/Archiving
 URL: http://www.rarlab.com/
