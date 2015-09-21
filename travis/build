@@ -27,6 +27,9 @@ done
 package_basename="amavisd-new"
 
 cd specs/amavisd-new
+rpmspec -q --srpm --qf "%{version}" $package_basename.spec
+rpmspec -q --srpm --qf "%{source}" $package_basename.spec
+
 tito init
 tito tag --keep-version --no-auto-changelog
 ls -al
